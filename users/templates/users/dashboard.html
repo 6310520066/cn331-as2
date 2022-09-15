@@ -12,7 +12,7 @@
 		<h5>My Course</h5>
 		<hr>
 		<div class="card card-body">
-			<a class="btn btn-primary btn-sm btn-block" href="create_enrollment">Enrollment</a>
+			<a class="btn btn-primary btn-sm btn-block" href="{% url 'create_enrollment' %}">Enrollment</a>
 			<table class="table table-sm">
 				<tr>
 					<th width="30"></th>
@@ -26,8 +26,12 @@
 						<td>{{order.course}}</td>
 						<td>{{order.date_created}}</td>
 						
-
-						<td><a class="btn btn-sm btn-danger" href="#">Withdraw</a></td>
+						<td>
+							<form action="{% url 'delete_enrollment' order.id %}">
+								<button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure ??')">Withdraw</button>
+							</form>
+						</td>
+						{% comment %} <td><a class="btn btn-sm btn-danger" href="{% url 'delete_enrollment' order.id %}">Withdraw</a></td> {% endcomment %}
 
 					</tr>
 				{% endfor %}

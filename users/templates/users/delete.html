@@ -1,0 +1,11 @@
+{% extends 'users/main.html'%}
+{% load static %}
+{% block content %}
+
+<p>Would you like to withdraw this course?</p>
+<form action="{% url 'delete_enrollment' course_id %}" mothod="POST">
+
+    <a href="{% url 'home' %}">Cancel</a>
+    <input type="submit" name="Confirm">
+</form>
+{% endblock %}
