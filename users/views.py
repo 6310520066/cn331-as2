@@ -6,7 +6,9 @@ from .forms import OrderForm
 # Create your views here.
 
 def home(request):
-    return render(request, 'users/dashboard.html')
+    orders = Order.objects.all()
+    context = {'orders':orders}
+    return render(request, 'users/dashboard.html', context)
 
 def all_course(request):
     course = Course.objects.all()
@@ -19,6 +21,13 @@ def user(request):
 def create_enrollment(request): 
     
     form = OrderForm()
-    
+    if request.method == 'POST':
+        #print("Printing POST: ", request.POST)
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+            
+            
     context = {'form':form}
     return render(request, 'users/create_enrollment.html', context)

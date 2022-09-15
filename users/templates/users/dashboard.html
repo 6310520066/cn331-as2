@@ -15,12 +15,22 @@
 			<a class="btn btn-primary btn-sm btn-block" href="create_enrollment">Enrollment</a>
 			<table class="table table-sm">
 				<tr>
-					<th width="30">Course Number</th>
+					<th width="30"></th>
 					<th width="60">Course Name</th>
 					<th width="30">Date Enrollment</th>
 					<th width="30">Withdraw</th>
 				</tr>
-	
+				{% for order in orders %}
+					<tr>
+						<td></td>
+						<td>{{order.course}}</td>
+						<td>{{order.date_created}}</td>
+						
+
+						<td><a class="btn btn-sm btn-danger" href="#">Withdraw</a></td>
+
+					</tr>
+				{% endfor %}
 			</table>
 		</div>
 	</div>
