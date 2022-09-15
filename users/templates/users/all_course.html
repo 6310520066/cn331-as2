@@ -22,8 +22,10 @@
                             <tr>
                                 <td>{{i.course_num}}</td>
                                 <td>{{i.course_name}}</td>
-                                <td>{{i.availableSeat}}</td>
-                                <td><button class="btn btn-primary" type="submit">Enroll</button></td>
+                                <td>{{i.availableSeat}}/{{i.maxSeat}}</td>
+                                <td><a href={% url 'home'%}><button id="enroll" class="btn btn-primary" type="submit">Enroll</button>
+    
+                                </td>
                             </tr>
                         {% endfor %}
                     </table>

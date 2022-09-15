@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
 
@@ -14,3 +14,6 @@ def all_course(request):
 
 def user(request):
     return render(request, 'users/user.html')
+
+def my_course(request):
+    return redirect('')
