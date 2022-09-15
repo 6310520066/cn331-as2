@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from .forms import CreateUserForm
+from .forms import CreateUserForm, OrderForm
 
 # Create your views here.
 def registerPage(request):
@@ -49,11 +49,12 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
+@login_required(login_url='login')
 def home(request, message=None):
     user = User.objects.get(id=request.user.id)
     orders = Order.objects.filter(user=user)
     context = {'orders':orders, "err_message": message}
-    return render(request, 'users/dashboard.html', context, )
+    return render(request, 'users/dashboard.html' )
 
 @login_required(login_url='login')
 def all_course(request):
@@ -65,8 +66,8 @@ def all_course(request):
 def user(request):
     return render(request, 'users/user.html')
 
+@login_required(login_url='login')
 def create_enrollment(request): 
-    
     form = OrderForm()
     if request.method == 'POST':
         #print("Printing POST: ", request.POST)
@@ -79,6 +80,7 @@ def create_enrollment(request):
     context = {'form':form}
     return render(request, 'users/create_enrollment.html', context)
 
+@login_required(login_url='login')
 def delete_enrollment(request, order_id):
     try:
         print("<--------------- Delete method --------------->")

@@ -8,7 +8,7 @@ from django import forms
 class OrderForm(ModelForm):
     class Meta:
         model = Order
-        fields = ["course"]
+        fields = ['course']
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
