@@ -1,0 +1,37 @@
+{% extends 'users/main.html' %}
+
+{% block content %}
+
+        <br>
+
+        <div class="row">
+            <div class="col-md">
+                <div class="card card-body">
+                    <h5>All Available Course</h5>
+                </div>
+                <div class="card card-body">
+                    <table class="table">
+                        <tr>
+                            <th width ="30">Course Number</th>
+                            <th width ="60"></width>Course Name</th>
+                            <th width ="30"></width>Seat Avilable</th>
+                            <th width ="30"></width>Enroll</th>
+                        </tr>
+
+                        {% for i in course %}
+                            <tr>
+                                <td>{{i.course_num}}</td>
+                                <td>{{i.course_name}}</td>
+                                <td>{{i.availableSeat}}</td>
+                                <td><button class="btn btn-primary" type="submit">Enroll</button></td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                
+                        
+                </div>
+            </div>
+            
+        </div>
+
+{% endblock %}
