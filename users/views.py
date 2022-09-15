@@ -1,7 +1,7 @@
+from imp import is_builtin
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
-from .forms import OrderForm 
 
 # Create your views here.
 
@@ -11,11 +11,13 @@ def home(request, message=None):
     context = {'orders':orders, "err_message": message}
     return render(request, 'users/dashboard.html', context, )
 
+@login_required(login_url='login')
 def all_course(request):
     course = Course.objects.all()
     total = Course.objects.all()
     return render(request, 'users/all_course.html', {'course' :course})
 
+@login_required(login_url='login')
 def user(request):
     return render(request, 'users/user.html')
 
