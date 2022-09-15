@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
+from .forms import OrderForm 
 
 # Create your views here.
 
@@ -15,5 +16,9 @@ def all_course(request):
 def user(request):
     return render(request, 'users/user.html')
 
-def my_course(request):
-    return redirect('')
+def create_enrollment(request): 
+    
+    form = OrderForm()
+    
+    context = {'form':form}
+    return render(request, 'users/create_enrollment.html', context)

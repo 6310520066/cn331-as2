@@ -19,3 +19,24 @@ class Course(models.Model):
     def availableSeat(self):
         return self.maxSeat-self.seat
     
+class User(models.Model):
+    name = models.CharField(max_length=40, null=True)
+    surname = models.CharField(max_length=40, null=True)
+    email = models.CharField(max_length=200, null=True)
+    
+    def __str__(self):
+    		return self.name
+    
+class Order(models.Model):
+    STATUS = (
+			('Pending', 'Pending'),
+			('Out for delivery', 'Out for delivery'),
+			('Delivered', 'Delivered'),
+			)
+
+    user = models.ForeignKey(User, null=True, on_delete= models.SET_NULL)
+    course = models.ForeignKey(Course, null=True, on_delete= models.SET_NULL)
+    date_created = models.DateTimeField(auto_now_add=True, null=True)
+    status = models.CharField(max_length=200, null=True, choices=STATUS)
+
+    
