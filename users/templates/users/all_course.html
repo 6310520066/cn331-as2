@@ -25,9 +25,9 @@
                                 <td>{{i.seat}}/{{i.maxSeat}}</td>
                                 <td>
                                     {% if i.state %}
-                                    <a href={% url 'home' %}><button id="enroll" class="btn btn-primary" type="submit">Open</button>
+                                    <a ><button id="enroll" class="btn btn-primary" type="submit">Open</button>
                                     {% else %}
-                                    <a href={% url 'home' %}><button id="enroll" class="btn btn-danger" type="button">Close</button>
+                                    <a ><button id="enroll" class="btn btn-danger" type="button">Close</button>
                                     {% endif %}
                                 </td>
                             </tr>
