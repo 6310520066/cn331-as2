@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from .forms import CreateUserForm
 
 # Create your views here.
-
+@login_required(login_url='login')	
 def home(request, message=None):
 	user = User.objects.get(pk=request.user.id)
 	orders = Order.objects.filter(user=user)
