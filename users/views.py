@@ -52,6 +52,7 @@ def all_course(request):
 def user(request):
 	return render(request, 'users/user.html')
 
+@login_required(login_url='login')
 def create_enrollment(request): 
 	
 	form = OrderForm()
@@ -72,6 +73,7 @@ def create_enrollment(request):
 	context = {'form':form}
 	return render(request, 'users/create_enrollment.html', context)
 
+@login_required(login_url='login')
 def delete_enrollment(request, order_id):
 	try:
 		print("<--------------- Delete method --------------->")
@@ -90,7 +92,8 @@ def delete_enrollment(request, order_id):
 		print("Error : ", e)
 	return home(request, {"err_message": "Order not found"})
 	# return render(request, "users/index.  html")
-	
+
+@login_required(login_url='login')	
 def registerPage(request):
 	if(request.user.is_authenticated):
 		return redirect('home')
