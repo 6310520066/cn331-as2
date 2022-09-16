@@ -1,6 +1,5 @@
-from email.policy import default
-from unittest.mock import seal
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -19,13 +18,13 @@ class Course(models.Model):
     def availableSeat(self):
         return self.maxSeat-self.seat
     
-class User(models.Model):
-    name = models.CharField(max_length=40, null=True)
-    surname = models.CharField(max_length=40, null=True)
-    email = models.CharField(max_length=200, null=True)
+# class User(models.Model):
+#     name = models.CharField(max_length=40, null=True)
+#     surname = models.CharField(max_length=40, null=True)
+#     email = models.CharField(max_length=200, null=True)
     
-    def __str__(self):
-    		return self.name
+#     def __str__(self):
+#     		return self.name
     
 class Order(models.Model):
     #STATUS = (

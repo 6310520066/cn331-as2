@@ -22,9 +22,13 @@
                             <tr>
                                 <td>{{i.course_num}}</td>
                                 <td>{{i.course_name}}</td>
-                                <td>{{i.availableSeat}}/{{i.maxSeat}}</td>
-                                <td><a href={% url 'home' %}><button id="enroll" class="btn btn-primary" type="submit">Open</button>
-    
+                                <td>{{i.seat}}/{{i.maxSeat}}</td>
+                                <td>
+                                    {% if i.state %}
+                                    <a href={% url 'home' %}><button id="enroll" class="btn btn-primary" type="submit">Open</button>
+                                    {% else %}
+                                    <a href={% url 'home' %}><button id="enroll" class="btn btn-danger" type="button">Close</button>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}
