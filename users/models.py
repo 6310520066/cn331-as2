@@ -15,8 +15,6 @@ class Course(models.Model):
     def __str__(self):
         return f"{self.course_num} {self.course_name} "
     
-    def availableSeat(self):
-        return self.maxSeat-self.seat
     
 # class User(models.Model):
 #     name = models.CharField(max_length=40, null=True)
@@ -40,3 +38,6 @@ class Order(models.Model):
     def __str__(self):
         return f"{self.course.course_name} {self.user.id}"
         
+        
+
+    

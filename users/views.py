@@ -1,6 +1,6 @@
 from users.forms import OrderForm
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from .models import *
 from django.contrib import messages
 
@@ -44,9 +44,10 @@ def all_course(request):
 	course = [model for model in (Course.objects.all().values())]
 
 	for c in range(len(raw_course)):
-		orders = Order.objects.filter(user=request.user.id).filter(course=raw_course[c].id)
+		orders = Order.objects.filter(course=raw_course[c].id)
 		course[c]["seat"] = (len(orders))
-	return render(request, 'users/all_course.html', {'course': (course)})
+	
+	return render(request, 'users/all_course.html', {'course': (course)}, )
 
 @login_required(login_url='login')
 def user(request):
@@ -63,13 +64,33 @@ def create_enrollment(request):
 			is_registered = Order.objects.filter(user=request.user.id).filter(course=request.POST["course"])
 			if(len(is_registered) > 0):
 				return HttpResponse("Already registered")
+			# is_open = Course.objects.filter(state=False)
+			# if(is_open):
+			# 	return HttpResponse("Subject is CLOSED!!")
+   
+   
+			# raw_course = Course.objects.all()
+			# course = [model for model in (Course.objects.all().values())]
+
+			# for c in range(len(raw_course)):
+			# 	orders = Order.objects.filter(course=raw_course[c].id)
+			# 	course[c]["seat"] = (len(orders))
+			# 	course[c]["maxSeat"] = Course.objects.filter("maxSeat")
+			# 	if (course[c]["seat"]) > (course[c]["maxSeat"]):
+			# 		return HttpResponse("Subject is Full")
+			course= Course.objects.get(pk=int(request.POST['course']))
+			seat = course.seat
+			maxSeat = course.maxSeat
+			if(seat >= maxSeat):
+				return redirect('full')
+			if(not course.state):
+				return redirect('close')
 			order = form.save()
 			user_instance = User.objects.get(pk=request.user.id)
 			order.user = user_instance
 			order.save()
 			return redirect('/')
-			
-			
+				
 	context = {'form':form}
 	return render(request, 'users/create_enrollment.html', context)
 
@@ -93,7 +114,7 @@ def delete_enrollment(request, order_id):
 	return home(request, {"err_message": "Order not found"})
 	# return render(request, "users/index.  html")
 
-@login_required(login_url='login')	
+
 def registerPage(request):
 	if(request.user.is_authenticated):
 		return redirect('home')
@@ -109,3 +130,11 @@ def registerPage(request):
 			
 		context = {'form':form}
 		return render(request, 'users/register.html', context)
+
+@login_required(login_url='login')
+def full(request):
+	return render(request, 'users/full.html')
+
+@login_required(login_url='login')
+def close(request):
+	return render(request, 'users/close.html')
