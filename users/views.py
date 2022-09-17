@@ -58,26 +58,11 @@ def create_enrollment(request):
 	
 	form = OrderForm()
 	if request.method == 'POST':
-		#print("Printing POST: ", request.POST)
 		form = OrderForm(request.POST)
 		if form.is_valid():
 			is_registered = Order.objects.filter(user=request.user.id).filter(course=request.POST["course"])
 			if(len(is_registered) > 0):
 				return HttpResponse("Already registered")
-			# is_open = Course.objects.filter(state=False)
-			# if(is_open):
-			# 	return HttpResponse("Subject is CLOSED!!")
-   
-   
-			# raw_course = Course.objects.all()
-			# course = [model for model in (Course.objects.all().values())]
-
-			# for c in range(len(raw_course)):
-			# 	orders = Order.objects.filter(course=raw_course[c].id)
-			# 	course[c]["seat"] = (len(orders))
-			# 	course[c]["maxSeat"] = Course.objects.filter("maxSeat")
-			# 	if (course[c]["seat"]) > (course[c]["maxSeat"]):
-			# 		return HttpResponse("Subject is Full")
 			course= Course.objects.get(pk=int(request.POST['course']))
 			seat = course.seat
 			maxSeat = course.maxSeat
@@ -99,20 +84,15 @@ def delete_enrollment(request, order_id):
 	try:
 		print("<--------------- Delete method --------------->")
 		print("Order ID : ", order_id)
-		# student = User.objects.get(id=request.user.id)
-		# course = Course.objects.get(id=course_id)
-		# print("Course : ", course)
-		# print("Student : ", student)
+  
 		order = Order.objects.get(id=order_id)
 		print("Order data : ", order)
 		order.delete()
 		print("Delete successfully !!")
-		# return render(request, 'users/delete.html')
 		return home(request)
 	except Exception as e:
 		print("Error : ", e)
 	return home(request, {"err_message": "Order not found"})
-	# return render(request, "users/index.  html")
 
 
 def registerPage(request):
