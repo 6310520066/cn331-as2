@@ -134,4 +134,4 @@ import django_heroku
 
 django_heroku.settings(locals())
 
-CSRF_TRUSTED_ORIGIN = ["127.0.0.1:8000"]
+CSRF_TRUSTED_ORIGIN = ["127.0.0.1:8000", "https://immense-depths-62077.herokuapp.com/"]
