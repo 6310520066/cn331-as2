@@ -130,8 +130,8 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-import django_heroku
+# import django_heroku
 
-django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 CSRF_TRUSTED_ORIGIN = ["127.0.0.1:8000", "https://immense-depths-62077.herokuapp.com/"]
