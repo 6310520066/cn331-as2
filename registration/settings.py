@@ -129,3 +129,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+import django_heroku
+
+django_heroku.settings(locals())
+
+CSRF_TRUSTED_ORIGIN = ["127.0.0.1:8000"]
