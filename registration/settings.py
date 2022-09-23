@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-5-13wqed70yl=ih8=k_ap#tdmvlb740hgqvnc@4%f4rw_z3t_w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["https://immense-depths-62077.herokuapp.com/"]
 
 
 # Application definition
@@ -130,7 +130,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
 
-# import django_heroku
+# imporPku
 
 # django_heroku.settings(locals())
 
