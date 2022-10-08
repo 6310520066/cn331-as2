@@ -11,10 +11,7 @@ class UsersTestCase(TestCase):
 
 		# create courses
 		course1 = Course.objects.create(course_num = "CN200", maxSeat = 2, state = True)
-		# course2 = Course.objects.create(course_num = "CN210", maxSeat = 2, state = False)
-		
-		Order.objects.create(
-			course = course1) #course2 = course2 )
+		Order.objects.create(course = course1)
 		
 	def test_seat_available(self):
 		""" is_seat_available should be True """
@@ -35,17 +32,4 @@ class UsersTestCase(TestCase):
 		for c in range(len(raw_course)):
 			orders = Order.objects.filter(course=raw_course[c].id)
 			course[c]["seat"] = (len(orders))
-
-		# user1 = Order.objects.create(
-		# 	first="harry", last="potter")
-		# user2 = Order.objects.create(
-		# 	first="hermione", last="granger")
-
-		# course =Course.objects.first()
-		# course.orders.add(user1)
-		# course.orders.add(user2)
 		self.assertFalse( len(course) > cn200.maxSeat )
-		# self.assertFalse(course.is_seat_available())
-	
-	# def check_course_status(self):
-	#     pass
