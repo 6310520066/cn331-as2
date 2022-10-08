@@ -8,9 +8,9 @@ jobs:
     - uses: action/checkout@v2
     - name: Run Django unit tests
       run: |
+      pip install coverage
       pip3 install --user -r requirements.txt
       python3 manage.py makemigrations
       python3 manage.py migrate
-      pip install coverage
       coverage run --source='.' manage.py test
       coverage report
